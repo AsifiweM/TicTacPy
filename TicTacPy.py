@@ -46,17 +46,16 @@ def playAgain():
 def makeMove(board, letter, move):
     board[move] = letter
 
-def isWinner(bo, le):
+def isWinner(board, letter):
     # Given a board and a player’s letter, this function returns True if that player has won.
-    # We use bo instead of board and le instead of letter so we don’t have to type as much.
-    return ((bo[7] == le and bo[8] == le and bo[9] == le) or # across the top
-    (bo[4] == le and bo[5] == le and bo[6] == le) or # across the middle
-    (bo[1] == le and bo[2] == le and bo[3] == le) or # across the bottom
-    (bo[7] == le and bo[4] == le and bo[1] == le) or # down the left side
-    (bo[8] == le and bo[5] == le and bo[2] == le) or # down the middle
-    (bo[9] == le and bo[6] == le and bo[3] == le) or # down the right side
-    (bo[7] == le and bo[5] == le and bo[3] == le) or # diagonal
-    (bo[9] == le and bo[5] == le and bo[1] == le)) # diagonal
+    return ((board[7] == letter and board[8] == letter and board[9] == letter) or # across the top
+    (board[4] == letter and board[5] == letter and board[6] == letter) or # across the middle
+    (board[1] == letter and board[2] == letter and board[3] == letter) or # across the bottom
+    (board[7] == letter and board[4] == letter and board[1] == letter) or # down the left side
+    (board[8] == letter and board[5] == letter and board[2] == letter) or # down the middle
+    (board[9] == letter and board[6] == letter and board[3] == letter) or # down the right side
+    (board[7] == letter and board[5] == letter and board[3] == letter) or # diagonal
+    (board[9] == letter and board[5] == letter and board[1] == letter)) # diagonal
 
 def getBoardCopy(board):
     # Make a duplicate of the board list and return it the duplicate.
@@ -68,7 +67,7 @@ def getBoardCopy(board):
 
 def isSpaceFree(board, move):
     # Return true if the passed move is free on the passed board.
-    return board[move] == True
+    return board[move] == ' '
 
 def getPlayerMove(board):
     # Let the player type in their move.
@@ -108,7 +107,7 @@ def getComputerMove(board, computerLetter):
                 return i
 
     # Check if the player could win on their next move, and block them.
-    for i in range(1, 10):
+    for i in range(1, 100):
         copy = getBoardCopy(board)
         if isSpaceFree(copy, i):
             makeMove(copy, playerLetter, i)
@@ -181,4 +180,3 @@ while True:
 
                 if not playAgain():
                     break
-
